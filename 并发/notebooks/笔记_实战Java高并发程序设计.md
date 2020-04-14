@@ -427,3 +427,22 @@ public class Main{
 java.lang.ClassCastException: java.util.HashMap$Node cannot be cast to java.util.HashMap$TreeNode
 ```
 
+## 3  JDK并发包
+
+### 3.1 可重入锁
+
+注意：
+
+​	（1）当unlock() 比 lock() 多时，会抛出 java.lang.IllegalMonitorStateException 异常。
+
+​	（2）当lock() 比 unlock() 多时，会一直阻塞。
+
+​	（3）当condition.signal未包含于reentrantLock.lock()和reentrantLock.unlock()中，会抛出  java.lang.IllegalMonitorStateException 异常。
+
+### 3.2 CyclicBarrier
+
+注意：
+
+​	（1）可能会出现两种异常，第一种是InteruptException，另一个是BrokenBarrierException，比如当其中某个线程中断，这个线程抛出InteruptException，其他9个是BrokenBarrierException，被
+
+等待在当前CyclicBarrier上的线程抛出

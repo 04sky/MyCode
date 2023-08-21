@@ -73,7 +73,7 @@ public static boolean interrupted() {
 ### 2.2.4 wait()和notify()
 
 ```Java
-public class Main {
+public class CyclicBarrier {
     final static Object obj = new Object();
     static class T1 extends Thread{
         @Override
@@ -131,7 +131,7 @@ public class Main {
 ### 2.2.4 suspend()和resume()
 
 ```
-public class Main {
+public class CyclicBarrier {
 
     private static Object u = new Object();
 
@@ -196,7 +196,7 @@ public class Main {
 ### 2.2.4 join()和yield()
 
 ```
-public class Main {
+public class CyclicBarrier {
     public volatile static int i = 0;
     static class Addthead extends Thread{
         @Override
@@ -222,11 +222,11 @@ yield()方法要点：它会让出cpu资源，但在让出后，还是会**参�
 ### 2.4 线程组
 
 ```Java
-public class Main implements Runnable{
+public class CyclicBarrier implements Runnable{
     public static void main(String[] args) {
         ThreadGroup tg = new ThreadGroup("PrintGroup");
-        Thread t1 = new Thread(tg, new Main(), "t1");
-        Thread t2 = new Thread(tg, new Main(), "t2");
+        Thread t1 = new Thread(tg, new CyclicBarrier(), "t1");
+        Thread t2 = new Thread(tg, new CyclicBarrier(), "t2");
         t1.start();
         t2.start();
         System.out.println(tg.activeCount());
@@ -254,9 +254,9 @@ public class Main implements Runnable{
 ### 2.5 守护线程
 
 ```Java
-public class Main extends Thread{
+public class CyclicBarrier extends Thread{
     public static void main(String[] args) {
-        Main main = new Main();
+        CyclicBarrier main = new CyclicBarrier();
         main.setDaemon(true);
         main.start();
 
@@ -298,13 +298,13 @@ Exception in thread "main" java.lang.IllegalThreadStateException
 ### 2.6 线程优先级
 
 ```Java
-public class Main{
+public class CyclicBarrier{
     static class LowPriority extends Thread{
         static int count = 0;
         @Override
         public void run() {
             while(true){
-                synchronized (Main.class){
+                synchronized (CyclicBarrier.class){
                     count++;
                     if (count>=10000000) {
                         break;
@@ -319,7 +319,7 @@ public class Main{
         @Override
         public void run() {
             while(true){
-                synchronized (Main.class){
+                synchronized (CyclicBarrier.class){
                     count++;
                     if (count>=10000000) {
                         break;
@@ -350,7 +350,7 @@ public class Main{
 ### 2.7 ArrayList的并发下错误
 
 ```Java
-public class Main extends Thread{
+public class CyclicBarrier extends Thread{
     static ArrayList<Integer> arrayList = new ArrayList<>();
     @Override
     public void run() {
@@ -360,12 +360,12 @@ public class Main extends Thread{
     }
 
     public static void main(String[] args) throws InterruptedException{
-        Main main1 = new Main();
-        Main main2 = new Main();
+        CyclicBarrier main1 = new CyclicBarrier();
+        CyclicBarrier main2 = new CyclicBarrier();
         main1.start();
         main2.start();
         main1.join();main2.join();
-        System.out.println(Main.arrayList.size());
+        System.out.println(CyclicBarrier.arrayList.size());
     }
 }
 ```
@@ -385,7 +385,7 @@ Exception in thread "Thread-1" java.lang.ArrayIndexOutOfBoundsException: 10
 ### 2.7 HashMap在并发下错误
 
 ```Java
-public class Main{
+public class CyclicBarrier{
     static HashMap<String, String> hashMap = new HashMap<>();
 
     public static class AddClass implements Runnable{

@@ -1,10 +1,9 @@
 import java.util.concurrent.BrokenBarrierException;
-import java.util.concurrent.CyclicBarrier;
 
-public class Main{
+public class CyclicBarrier {
 
     public static void main(String[] args) throws InterruptedException{
-        CyclicBarrier cyclicBarrier = new CyclicBarrier(7, () -> {
+        java.util.concurrent.CyclicBarrier cyclicBarrier = new java.util.concurrent.CyclicBarrier(7, () -> {
             System.out.println("****七龙珠集齐!");
         });
         for (int i = 1; i <= 7; i++) {
